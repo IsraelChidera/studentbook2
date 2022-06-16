@@ -9,13 +9,17 @@ import Footer from '../components/Footer';
 
 const Landing = () => {
 
-    
+    const [login, setLogin] = useState(false);
+    const handleLogin = () => {
+        console.log('nav login is clicked')
+        setLogin(true);
+    }
   
 
   return (
     <Box className='mt-6'>
-        <Navbar />
-        <Header />
+        <Navbar handleLogin={handleLogin} />
+        <Header login={login} setLogin={setLogin} />
         <Recommend />        
         <Footer />
 

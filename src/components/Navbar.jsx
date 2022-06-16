@@ -1,7 +1,11 @@
 import React from 'react';
 import Box from './UI/Box';
-import Button from './UI/Button';
-const Navbar = () => {
+import Button from './UI/Button'; 
+
+const Navbar = ({handleLogin}) => {
+
+    
+
   return (
     <Box className='flex justify-around items-center'>
         <Box className='font-bold text-lg'>
@@ -11,7 +15,7 @@ const Navbar = () => {
         </Box>
 
         <Box>
-            <ul className='flex justify-between text-sm font-bold text-textgray'>
+            <ul className='flex justify-between text-sm font-extrabold text-textgray'>
                 <li className='mr-6'>
                     <a href="#">
                         Contact
@@ -27,8 +31,11 @@ const Navbar = () => {
         </Box>
 
         <Box>
-            <Button className='bg-primary'>
-                Sign Up
+            <Button 
+                className='bg-primary'
+                onClick={handleLogin}
+            >
+                Login
             </Button>
         </Box>
     </Box>

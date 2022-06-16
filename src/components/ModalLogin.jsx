@@ -1,58 +1,17 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Checkbox, Form, Input } from 'antd';
-import Button from './UI/Button';
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import {useNavigate} from 'react-router-dom';
-import {auth} from '../firebase';
+import Button from './UI/Button'
 
-const ModalForm = ({setShowModal}) => {
+const ModalLogin = ({setLogin}) => {
 
-    
-    const navigate = useNavigate();
-
-    const [inputs, setInputs] = useState({
-        username: '',
-        email: '',
-        password: ''
-    })
-
-    const handleChange = (e) => {
-        setInputs((prevInput) => {
-            return {...prevInput, [e.target.name]: e.target.value}
-        })
-    }
-
-    
     const onFinish = (values) => {
         console.log('Success:', values);
-
-        createUserWithEmailAndPassword(auth, inputs.email, inputs.password)
-        .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            // ...
-            navigate('/dashboard')
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorMessage, errorCode)
-        });
-
-        setInputs({
-            email: '',
-            password: ''
-        })
-    };
+      };
     
-    const onFinishFailed = (errorInfo) => {
+      const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
-    };
+      };
 
-    
-
-
-    
   return (
     <>
         <div className='fixed inset-0 bg-white bg-opacity-75 transition-opacity'>
@@ -73,7 +32,7 @@ const ModalForm = ({setShowModal}) => {
                             bg-transparent hover:bg-gray-200 hover:text-gray-900 
                             rounded-lg text-sm p-1.5 ml-auto inline-flex items-center 
                             dark:hover:bg-dark dark:hover:text-white" 
-                            onClick={()=>setShowModal(false)}
+                            onClick={()=>setLogin(false)}
                         >
                             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
                         </button>
@@ -81,43 +40,18 @@ const ModalForm = ({setShowModal}) => {
                             <h3 className="mb-10 text-xl font-medium 
                                 text-secondary"
                             >
-                                Sign Up 
+                                Sign in 
                             </h3>
                             <Form
                                 name="basic"
-                                labelCol={{
-                                    span: 8,
-                                }}
-                                wrapperCol={{
-                                    span: 16,
-                                }}
+                                
                                 initialValues={{
                                     remember: true,
                                 }}
                                 onFinish={onFinish}
                                 onFinishFailed={onFinishFailed}
                                 autoComplete="off"
-                            >
-                                <Form.Item
-                                    label="Username"
-                                    name="username"
-                                    rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input your username!',
-                                    },
-                                    ]}
-                                >
-                                    <Input 
-                                        className="bg-gray-50 border border-primary text-secondary 
-                                        text-sm rounded-lg focus:ring-blue-500 focus:border-primary 
-                                        block w-full p-2.5 dark:bg-white dark:border-primary 
-                                        dark:placeholder-dark dark:text-secondary" 
-                                        onChange={handleChange}
-                                        type="text"
-                                        name="username"
-                                    />
-                                </Form.Item>
+                            >                                
 
                                 <Form.Item
                                     name="email"
@@ -139,9 +73,6 @@ const ModalForm = ({setShowModal}) => {
                                         text-sm rounded-lg focus:ring-blue-500 focus:border-primary 
                                         block w-full p-2.5 dark:bg-white dark:border-primary 
                                         dark:placeholder-dark dark:text-secondary" 
-                                        onChange={handleChange}
-                                        type="email"
-                                        name="email"
                                     />
                                 </Form.Item>
 
@@ -161,9 +92,6 @@ const ModalForm = ({setShowModal}) => {
                                         text-sm rounded-lg focus:ring-blue-500 focus:border-primary 
                                         block w-full p-2.5 dark:bg-white dark:border-primary 
                                         dark:placeholder-dark dark:text-secondary" 
-                                        onChange={handleChange}
-                                        type="password"
-                                        name="password"
                                     />
                                 </Form.Item>
                         
@@ -192,4 +120,4 @@ const ModalForm = ({setShowModal}) => {
   )
 }
 
-export default ModalForm
+export default ModalLogin

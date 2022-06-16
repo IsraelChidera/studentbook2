@@ -7,9 +7,10 @@ import easyicon from './assets/headereasy.svg';
 import mobileicon from './assets/headermobile.svg';
 import headerimg from './assets/headerimg.svg';
 import ModalForm from './ModalForm';
+import ModalLogin from './ModalLogin';
 // import { Button, Modal } from 'antd';
 
-const Header = () => {
+const Header = ({login, setLogin}) => {
 
     const [showModal, setShowModal] = useState(false);
     const handleModal = () => {
@@ -19,8 +20,8 @@ const Header = () => {
   return (
     <>
           
-        <Box className='relative mt-24 text-6xl text-center'>
-            <Box className='w-131 mx-auto'>
+        <Box className='relative mt-24 md:text-6xl text-4xl text-center'>
+            <Box className='md:w-131 w-full mx-auto p-8'>
                 <Box>
                     <Text>
                         Sorting Algorithms in Javascript
@@ -32,7 +33,7 @@ const Header = () => {
                         </Button>
 
                         <Button                           
-                            className='text-textgray bg-white drop-shadow-2xl'
+                            className='text-textgray bg-secondary drop-shadow-2xl'
                             type="button"
                             onClick={handleModal}
                         >
@@ -42,8 +43,8 @@ const Header = () => {
                 </Box>
             </Box>
 
-            <Box className='flex justify-between items-center w-8/12 mx-auto mt-20'>
-                <Box className='mr-6'>
+            <Box className='md:flex justify-between items-center w-8/12 mx-auto mt-20'>
+                <Box className='md:mr-6 mb-20 md:mb-0'>
 
                     <Box className='border-b border-b-textgray 
                         flex justify-center items-center pb-4'
@@ -126,7 +127,9 @@ const Header = () => {
         {
             showModal? <ModalForm setShowModal={setShowModal}/>: ''
         }
-        
+        {
+            login? <ModalLogin setLogin={setLogin}/>: ''
+        }
        
     </>
   )
