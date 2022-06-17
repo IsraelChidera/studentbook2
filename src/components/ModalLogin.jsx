@@ -1,16 +1,47 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Checkbox, Form, Input } from 'antd';
-import Button from './UI/Button'
+import Button from './UI/Button';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import {auth} from '../firebase';
+import {useNavigate} from 'react-router-dom';
 
 const ModalLogin = ({setLogin}) => {
+    const [inputs, setInputs] = useState({
+        email: '',
+        password: ''
+    })
+    const navigate = useNavigate();
 
-    const onFinish = (values) => {
-        console.log('Success:', values);
-      };
+    const handleChange = (e) => {
+        setInputs((prevInput) => {
+            return {...prevInput, [e.target.name]: e.target.value}
+        })
+    }
+
+    const onFinish = () => {
+        
+        signInWithEmailAndPassword(auth, inputs.email, inputs.password)
+        .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            console.log("signed in successfully")
+            navigate('/dashboard')
+            // ...
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+        });
+
+        setInputs({
+            email: '',
+            password: ''
+        })
+    };
     
-      const onFinishFailed = (errorInfo) => {
+    const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
-      };
+    };
 
   return (
     <>
@@ -20,7 +51,7 @@ const ModalLogin = ({setLogin}) => {
             // right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full"
 
             className="justify-center items-center flex overflow-x-hidden  fixed inset-0 z-40 bg-black
-                        overflow-y-auto outline-none focus:outline-none h-modal md:h-full"
+                        overflow-y-auto outline-none focus:outline-none h-modal md:h-full mt-20"
 
             >
                 <div className="relative p-4 w-full max-w-md h-full md:h-auto">
@@ -58,10 +89,10 @@ const ModalLogin = ({setLogin}) => {
                                     label="E-mail"
                                     className='my-6'
                                     rules={[
-                                    {
-                                        type: 'email',
-                                        message: 'The input is not valid E-mail!',
-                                    },
+                                    // {
+                                    //     type: 'email',
+                                    //     message: 'The input is not valid E-mail!',
+                                    // },
                                     {
                                         required: true,
                                         message: 'Please input your E-mail!',
@@ -72,7 +103,10 @@ const ModalLogin = ({setLogin}) => {
                                         className="bg-gray-50 border border-primary text-secondary 
                                         text-sm rounded-lg focus:ring-blue-500 focus:border-primary 
                                         block w-full p-2.5 dark:bg-white dark:border-primary 
-                                        dark:placeholder-dark dark:text-secondary" 
+                                        dark:placeholder-dark dark:text-secondary"
+                                        name='email'
+                                        type='email' 
+                                        onChange={handleChange}
                                     />
                                 </Form.Item>
 
@@ -85,13 +119,16 @@ const ModalLogin = ({setLogin}) => {
                                         message: 'Please input your password!',
                                     },
                                     ]}
-                                    hasFeedback
+                                    // hasFeedback
                                 >
                                     <Input.Password 
                                         className="bg-gray-50 border border-primary text-secondary 
                                         text-sm rounded-lg focus:ring-blue-500 focus:border-primary 
                                         block w-full p-2.5 dark:bg-white dark:border-primary 
                                         dark:placeholder-dark dark:text-secondary" 
+                                        name='password'
+                                        type='password' 
+                                        onChange={handleChange}
                                     />
                                 </Form.Item>
                         

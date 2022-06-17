@@ -61,7 +61,7 @@ const ModalForm = ({setShowModal}) => {
             // right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full"
 
             className="justify-center items-center flex overflow-x-hidden  fixed inset-0 z-40 bg-black
-                        overflow-y-auto outline-none focus:outline-none h-modal md:h-full"
+                        overflow-y-auto outline-none focus:outline-none h-modal md:h-full mt-20"
 
             >
                 <div className="relative p-4 w-full max-w-md h-full md:h-auto">

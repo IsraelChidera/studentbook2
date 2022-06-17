@@ -7,3 +7,10 @@
 body {
   scroll-behavior: smooth;
 }
+
+.dbgrid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* grid-template-columns: 1fr 6fr; */
+}
