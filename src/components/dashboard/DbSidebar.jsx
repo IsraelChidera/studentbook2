@@ -11,12 +11,12 @@ import todo from '../assets/todo.svg';
 
 const DbSidebar = () => {
   return (
-    <Box className='sidebar bg-white p-6'>
+    <Box className='sidebar bg-white pt-6'>
             <ul className='flex flex-col justify-around pt-10'>
-                <li className='mb-10 '>
+                <li className='mb-6 '>
                     <NavLink 
                         to="/"
-                        className='flex bg-secondary text-white p-2'
+                        className='flex bg-secondary text-white p-4'
                     >
                         <img 
                             src={dashboard}
@@ -27,8 +27,8 @@ const DbSidebar = () => {
                     </NavLink>
                 </li>
 
-                <li className='mb-10'>
-                    <a href="#" className='flex'>
+                <li className='mb-6'>
+                    <a href="#" className='flex p-4'>
                         <img 
                             src={timetracker}
                             alt='time icon'
@@ -38,8 +38,8 @@ const DbSidebar = () => {
                     </a>
                 </li>
 
-                <li className='mb-10'>
-                    <a href="#" className='flex'>
+                <li className='mb-6'>
+                    <a href="#" className='flex p-4'>
                         <img 
                             src={todo}
                             alt='todo icon'
@@ -49,8 +49,8 @@ const DbSidebar = () => {
                     </a>
                 </li>
 
-                <li className='mb-10'>
-                    <a href="#" className='flex'>
+                <li className='mb-6'>
+                    <a href="#" className='flex p-4'>
                         <img 
                             src={report}
                             alt='report icon'
@@ -62,8 +62,8 @@ const DbSidebar = () => {
                     </a>
                 </li>
 
-                <li className='mb-10'>
-                    <a href="#" className='flex'>
+                <li className='mb-6'>
+                    <a href="#" className='flex p-4'>
                         <img 
                             src={analytics}
                             alt='analytics icon'

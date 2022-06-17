@@ -12,12 +12,12 @@ import projects from '../assets/projects.svg';
 const DbContent = () => {
   return (
     <Box className='dbgrid bg-gray pt-10 ' >
-        <Box className='fixed w-52 z-0 h-screen top-20 left-0 bg-white'>
+        <Box className='fixed w-52 h-full pt-16 top-0 left-0 bg-white'>
             <DbSidebar/>
         </Box>
 
         <Box 
-            className='content ml-56 w-full'
+            className='content ml-56 w-full pb-10'
         >
 
             <Box className='flex justify-between items-center w-full p-8'>

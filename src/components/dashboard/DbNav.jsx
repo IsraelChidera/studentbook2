@@ -7,7 +7,7 @@ import holder from '../assets/holder.svg';
 
 const DbNav = () => {
   return (
-    <Box className='flex justify-between items-center py-6 bg-white px-6 text-sm'>
+    <Box className='ml-56 flex justify-between items-center py-6 bg-white px-6 text-sm'>
         <Box className='flex justify-between items-center'>
             <Box className='font-bold text-lg mr-10'>
                 <a href="#">

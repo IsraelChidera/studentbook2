@@ -6,7 +6,7 @@ import Box from '../components/UI/Box';
 const Dashboard = () => {
   return (
     <Box>
-        <DbNav className='z-20'/>
+        <DbNav className=''/>
         <DbContent/>
         Dashboard view
     </Box>
