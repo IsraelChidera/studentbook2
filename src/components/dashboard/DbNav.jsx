@@ -8,12 +8,7 @@ import holder from '../assets/holder.svg';
 const DbNav = () => {
   return (
     <Box className='ml-56 flex justify-between items-center py-6 bg-white px-6 text-sm'>
-        <Box className='flex justify-between items-center'>
-            <Box className='font-bold text-lg mr-10'>
-                <a href="#">
-                    STUDENT<span className='text-primary'>BOOK</span>
-                </a>
-            </Box>
+        <Box className='flex justify-between items-center'>            
 
             <Box className='flex justify-center items-center '>
                 <Box className='mr-10'>
@@ -27,6 +22,7 @@ const DbNav = () => {
                     Dashboard
                 </Text>
             </Box>
+            
         </Box>
 
         <Box className='flex justify-between items-center'>
