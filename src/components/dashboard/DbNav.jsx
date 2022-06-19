@@ -6,18 +6,27 @@ import search from '../assets/search.svg';
 import holder from '../assets/holder.svg';
 
 const DbNav = () => {
+
+    const handleClick = () => {
+        console.log("dbnav clicked")
+    }
   return (
-    <Box className='ml-56 flex justify-between items-center py-6 bg-white px-6 text-sm'>
+    <Box className='md:ml-56 flex justify-between items-center py-6 bg-white px-6 text-sm'>
         <Box className='flex justify-between items-center'>            
 
             <Box className='flex justify-center items-center '>
-                <Box className='mr-10'>
+                <Box 
+                    className='mr-10 cursor-pointer'
+                    
+                >
                     <img 
-                        src={ham}
+                        src={ham} 
                         alt="ham icon"
                         className='w-4'
+                        onClick={handleClick}
                     /> 
                 </Box>
+
                 <Text>                   
                     Dashboard
                 </Text>
@@ -45,7 +54,7 @@ const DbNav = () => {
             </Box>
         </Box>
 
-        <Box className='flex justify-center items-center ml-20'>
+        <Box className='md:flex hidden justify-center items-center ml-20'>
             <Box className='mr-4 w-8'>
                 <img
                     src={holder}

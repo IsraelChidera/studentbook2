@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Box from './UI/Box';
 import Button from './UI/Button'; 
+import ham from './assets/ham.svg';
 
 const Navbar = ({handleLogin}) => {
+    const [click, setClick] = useState(false)
 
-    
+    const handleClick = () => {
+        console.log('hamburger icon')
+    }    
 
   return (
     <Box className='flex justify-around items-center'>
@@ -14,30 +18,18 @@ const Navbar = ({handleLogin}) => {
             </a>
         </Box>
 
-        <Box>
-            <ul className='flex justify-between text-sm font-extrabold text-textgray'>
-                <li className='mr-6'>
-                    <a href="#">
-                        Contact
-                    </a>
-                </li>
+        <Box className='flex justify-between items-center'>            
 
-                <li>
-                    <a href="#">
-                        About
-                    </a>
-                </li>
-            </ul>
+            <Box className='ml-6'>
+                <Button 
+                    className='bg-primary block'
+                    onClick={handleLogin}
+                >
+                    Login
+                </Button>
+            </Box>
         </Box>
-
-        <Box>
-            <Button 
-                className='bg-primary'
-                onClick={handleLogin}
-            >
-                Login
-            </Button>
-        </Box>
+                    
     </Box>
   )
 }

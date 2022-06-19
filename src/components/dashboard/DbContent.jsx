@@ -12,16 +12,16 @@ import projects from '../assets/projects.svg';
 const DbContent = () => {
   return (
     <Box className='dbgrid bg-gray pt-10 ' >
-        <Box className='fixed w-52 h-full pt-16 top-0 left-0 bg-white'>
+        <Box className='md:fixed md:block hidden md:w-52 md:h-full pt-16 md:top-0 md:left-0 bg-white'>
             <DbSidebar/>
         </Box>
 
         <Box 
-            className='content ml-56 w-full pb-10'
+            className='content md:ml-56 w-full pb-10'
         >
 
-            <Box className='flex justify-between items-center w-full p-8'>
-                <Box>
+            <Box className='md:flex block justify-between items-center w-full p-8'>
+                <Box className='text-right md:text-left mb-4 md:mb-0'>
                     <Text className='text-4xl font-bold'>
                         Today
                     </Text>
@@ -33,10 +33,11 @@ const DbContent = () => {
                 <Box>
                     <Box
                         // title="Start Time Tracker"                       
-                        style={{
-                            width: 300,
-                        }}
-                        className='bg-white rounded-3xl flex justify-center items-center p-2'
+                        // style={{
+                        //     width: 300,
+                        // }}
+                        className='md:w-80 w-full bg-white rounded-3xl 
+                        flex justify-end items-center p-2'
                     >
                         <Text className='font-semibold'>
                             Start Time Tracker
@@ -53,9 +54,9 @@ const DbContent = () => {
                 </Box>
             </Box>
 
-            <Box className='p-8 flex justify-between'>
+            <Box className='p-8 md:flex md:justify-between'>
 
-                <Box className='bg-white p-4 rounded-3xl h-full w-full m-2'>
+                <Box className='bg-white md:mt-0 mt-8 p-4 rounded-3xl h-full w-full m-2'>
                     <Box className='flex flex-col justify-between'>
                         <Text className='text-lg font-semibold mb-10'>
                             Weekly Activity
@@ -77,7 +78,7 @@ const DbContent = () => {
                     </Box>
                 </Box>
 
-                <Box className='bg-white p-4 m-2 rounded-3xl h-full w-full'>
+                <Box className='bg-white md:mt-0 mt-8 p-4 m-2 rounded-3xl h-full w-full'>
                     <Box className='flex flex-col justify-between'>
                         <Text className='text-lg font-semibold mb-10'>
                             Worked this week
@@ -99,7 +100,7 @@ const DbContent = () => {
                     </Box>
                 </Box>
 
-                <Box className='bg-white p-4 m-2 rounded-3xl h-full w-full'>
+                <Box className='bg-white md:mt-0 mt-8 p-4 m-2 rounded-3xl h-full w-full'>
                     <Box className='flex flex-col justify-between'>
                         <Text className='text-lg font-semibold mb-10'>
                             Todos 
@@ -123,8 +124,8 @@ const DbContent = () => {
 
             </Box>
 
-            <Box className='p-8 flex justify-between'>
-                <Box className='p-4 m-4 rounded-3xl bg-white w-full'>
+            <Box className='p-8 md:flex block justify-between'>
+                <Box className='p-4 md:m-4 mt-4 rounded-3xl bg-white w-full'>
                     <Box className='flex justify-between items-center'>
                         <Text className='text-lg font-semibold'>
                             Recent activity
@@ -143,7 +144,7 @@ const DbContent = () => {
                     </Box>
                 </Box>
 
-                <Box className='p-4 m-4 rounded-3xl bg-white w-full'>
+                <Box className='p-4 md:m-4 mt-4 rounded-3xl bg-white w-full'>
                     <Text className='text-lg font-semibold '>
                         Todos
                     </Text>

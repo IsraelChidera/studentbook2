@@ -7,8 +7,7 @@ const Dashboard = () => {
   return (
     <Box>
         <DbNav className=''/>
-        <DbContent/>
-        Dashboard view
+        <DbContent/>        
     </Box>
   )
 }
