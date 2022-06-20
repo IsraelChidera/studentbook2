@@ -50,11 +50,11 @@ const Profile = ({click}) => {
         console.log('Failed:', errorInfo);
     };
 
-    const [componentDisabled, setComponentDisabled] = useState(true);
+    // const [componentDisabled, setComponentDisabled] = useState(true);
 
-    const onFormLayoutChange = ({ disabled }) => {
-      setComponentDisabled(disabled);
-    };
+    // const onFormLayoutChange = ({ disabled }) => {
+    //   setComponentDisabled(disabled);
+    // };
   return (
     <>
         <Box 

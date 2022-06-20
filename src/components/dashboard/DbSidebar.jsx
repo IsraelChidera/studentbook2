@@ -64,14 +64,18 @@ const DbSidebar = ({click}) => {
                 </li>
 
                 <li className='mb-6'>
-                    <a href="#" className='flex p-4'>
+                    <NavLink 
+                        to="/todo" 
+                        className={ ({isActive}) => 
+                            (isActive? 'flex bg-secondary text-white p-4':'text-secondary p-4 flex')}
+                    >
                         <img 
                             src={todo}
                             alt='todo icon'
                             className='w-4 mr-2'
                         />
                         <Text>Todos</Text>
-                    </a>
+                    </NavLink>
                 </li>
 
                 <li className='mb-6'>
