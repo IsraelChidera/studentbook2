@@ -142,7 +142,7 @@ const ModalLogin = ({setLogin}) => {
                                     <Button 
                                         className='bg-secondary mt-4'
                                     >
-                                        Submit
+                                        Login
                                     </Button>
                                 </Form.Item>
                             </Form>

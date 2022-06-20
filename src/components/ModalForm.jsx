@@ -177,7 +177,7 @@ const ModalForm = ({setShowModal}) => {
                                     <Button 
                                         className='bg-secondary mt-4'
                                     >
-                                        Submit
+                                        Sign up
                                     </Button>
                                 </Form.Item>
                             </Form>

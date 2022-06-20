@@ -17,9 +17,9 @@ const DbContent = ({click}) => {
             // className='lg:fixed lg:block hidden lg:w-52 lg:h-full pt-16 lg:top-0 lg:left-0 bg-white'
             className={
                 click? 
-            'fixed block w-52 h-full pt-16 top-0 left-0 bg-white'
+            'fixed block w-52 h-screen pt-16 top-0 left-0 bg-white overflow-auto'
             : 
-            "lg:fixed lg:block hidden lg:w-52 lg:h-full pt-16 lg:top-0 lg:left-0 bg-white" }
+            "lg:fixed lg:block hidden lg:w-52 lg:h-screen pt-16 overflow-auto lg:top-0 lg:left-0 bg-white" }
             // className='fixed block w-52 h-full pt-16 top-0 left-0 bg-white'
         >
             <DbSidebar />
@@ -97,7 +97,7 @@ const DbContent = ({click}) => {
 
                         <Box className='flex justify-between items-center'>
                             <Text className='mr-20 text-4xl font-bold'>
-                                00:00:00
+                                00:41:04 s
                             </Text>
 
                             <Box>
@@ -119,7 +119,7 @@ const DbContent = ({click}) => {
 
                         <Box className='flex justify-between items-center'>
                             <Text className='mr-20 text-4xl font-bold'>
-                                0
+                                2
                             </Text>
 
                             <Box>

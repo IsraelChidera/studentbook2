@@ -23,10 +23,10 @@ const DbNav = ({click, handleClick}) => {
 
             <Box className='flex justify-center items-center '>
                 <Box 
-                    className='mr-4 cursor-pointer '
+                    className='mr-4 cursor-pointer transition ease-in-out duration-300'
                     
                 >
-                    <i className={click ? 'block lg:hidden fas fa-times text-lg': 'block lg:hidden fas fa-bars text-lg'} onClick={handleClick}/>                    
+                    <i className={click ? 'block lg:hidden fas fa-times text-lg': 'transition ease-in-out duration-300 block lg:hidden fas fa-bars text-lg'} onClick={handleClick}/>                    
                 </Box>
 
                 <Text className='lg:text-2xl font-bold text-dark'>                   
@@ -57,11 +57,11 @@ const DbNav = ({click, handleClick}) => {
         </Box>
 
         <Box className='md:flex hidden justify-center items-center ml-20'>
-            <Box className='bg-primary w-1/2 p-2 mr-2 rounded-full'>
-                <i className="fa fa-user text-white" aria-hidden="true"></i>    
+            <Box className=''>
+                <i className="fa fa-user text-primary text-2xl" aria-hidden="true"></i>    
             </Box>
-            <Text>
-                Username
+            <Text className='font-semibold ml-2'>
+                Israel Chidera
             </Text>            
         </Box>   
         </Box> 

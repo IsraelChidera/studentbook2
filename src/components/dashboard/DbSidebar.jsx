@@ -1,18 +1,29 @@
 import React from 'react';
 import Box from '../UI/Box';
 import Text from '../UI/Text';
-import { NavLink } from 'react-router-dom';
-import settings from '../assets/settings.svg';
+import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 import analytics from '../assets/analytisc.svg';
 import dashboard from '../assets/dashboard.svg';
 import report from '../assets/report.svg';
-import timetracker from '../assets/time.svg';
 import todo from '../assets/todo.svg';
+import { getAuth, signOut } from "firebase/auth";
 
 const DbSidebar = () => {
+    const auth = getAuth();
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        signOut(auth).then(() => {
+            // Sign-out successful.
+            console.log('Sign-out successful.')
+            navigate('/')
+          }).catch((error) => {
+            // An error happened.
+          });
+    }
+
   return (
     <Box className='bg-white pt-6'>
-            <ul className='flex flex-col justify-around pt-10'>
+            <ul className='flex flex-col justify-around pt-10 overflow-y-auto'>
                 <li className='mb-6 '>
                     <NavLink 
                         to="/"
@@ -29,12 +40,10 @@ const DbSidebar = () => {
 
                 <li className='mb-6'>
                     <a href="#" className='flex p-4'>
-                        <img 
-                            src={timetracker}
-                            alt='time icon'
-                            className='w-4 mr-2'
-                        />
-                        Timetable
+                        <i className="fa fa-user text-dark mr-2 flex items-center" 
+                        aria-hidden="true"
+                        ></i>   
+                        Profile
                     </a>
                 </li>
 
@@ -70,6 +79,13 @@ const DbSidebar = () => {
                             className='w-4 mr-2'
                         />
                         <Text>Courses</Text>
+                    </a>
+                </li>
+
+                <li className='mb-6'>
+                    <a className='flex p-4 cursor-pointer' onClick={handleLogout}>
+                        <i className="fa fa-sign-out text-dark mr-2 flex items-center" aria-hidden="true"></i> 
+                        Logout
                     </a>
                 </li>
             </ul>
