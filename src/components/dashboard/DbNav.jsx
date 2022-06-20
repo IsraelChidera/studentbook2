@@ -1,33 +1,35 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Box from '../UI/Box';
 import Text from '../UI/Text';
 import ham from '../assets/ham.svg';
 import search from '../assets/search.svg';
 import holder from '../assets/holder.svg';
 
-const DbNav = () => {
+const DbNav = ({click, handleClick}) => {
+    // const [click, setClick] = useState(false);
 
-    const handleClick = () => {
-        console.log("dbnav clicked")
-    }
+    // const handleClick = () => {
+    //     console.log("dbnav clicked");
+    //     setClick(!click);
+    // }
   return (
-    <Box className='md:ml-56 flex justify-between items-center py-6 bg-white px-6 text-sm'>
+    <Box 
+        // className='lg:ml-56 flex justify-between items-center py-6 bg-white px-6 text-sm'
+        className={click? 'ml-56 flex justify-between items-center py-6 bg-white px-6 lg:text-sm': 
+        'lg:ml-56 flex justify-between items-center py-6 bg-white px-6 lg:text-sm' }
+        // className='ml-56 flex justify-between items-center py-6 bg-white px-6 text-sm'
+    >
         <Box className='flex justify-between items-center'>            
 
             <Box className='flex justify-center items-center '>
                 <Box 
-                    className='mr-10 cursor-pointer'
+                    className='mr-4 cursor-pointer '
                     
                 >
-                    <img 
-                        src={ham} 
-                        alt="ham icon"
-                        className='w-4'
-                        onClick={handleClick}
-                    /> 
+                    <i className={click ? 'block lg:hidden fas fa-times text-lg': 'block lg:hidden fas fa-bars text-lg'} onClick={handleClick}/>                    
                 </Box>
 
-                <Text>                   
+                <Text className='lg:text-2xl font-bold text-dark'>                   
                     Dashboard
                 </Text>
             </Box>
@@ -55,11 +57,8 @@ const DbNav = () => {
         </Box>
 
         <Box className='md:flex hidden justify-center items-center ml-20'>
-            <Box className='mr-4 w-8'>
-                <img
-                    src={holder}
-                    alt='placeholder icon'
-                />    
+            <Box className='bg-primary w-1/2 p-2 mr-2 rounded-full'>
+                <i className="fa fa-user text-white" aria-hidden="true"></i>    
             </Box>
             <Text>
                 Username

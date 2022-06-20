@@ -11,7 +11,7 @@ import todo from '../assets/todo.svg';
 
 const DbSidebar = () => {
   return (
-    <Box className='sidebar bg-white pt-6'>
+    <Box className='bg-white pt-6'>
             <ul className='flex flex-col justify-around pt-10'>
                 <li className='mb-6 '>
                     <NavLink 

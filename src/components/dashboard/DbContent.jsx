@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Box from '../UI/Box';
 import Text from '../UI/Text';
 import Button from '../UI/Button';
@@ -9,15 +9,26 @@ import activity from '../assets/activity.svg';
 import worktime from '../assets/worktime.svg';
 import projects from '../assets/projects.svg';
 
-const DbContent = () => {
+const DbContent = ({click}) => {
+    // const [click, setClick] = useState(false)
   return (
     <Box className='dbgrid bg-gray pt-10 ' >
-        <Box className='md:fixed md:block hidden md:w-52 md:h-full pt-16 md:top-0 md:left-0 bg-white'>
-            <DbSidebar/>
+        <Box 
+            // className='lg:fixed lg:block hidden lg:w-52 lg:h-full pt-16 lg:top-0 lg:left-0 bg-white'
+            className={
+                click? 
+            'fixed block w-52 h-full pt-16 top-0 left-0 bg-white'
+            : 
+            "lg:fixed lg:block hidden lg:w-52 lg:h-full pt-16 lg:top-0 lg:left-0 bg-white" }
+            // className='fixed block w-52 h-full pt-16 top-0 left-0 bg-white'
+        >
+            <DbSidebar />
         </Box>
 
         <Box 
-            className='content md:ml-56 w-full pb-10'
+            // className='lg:ml-56 w-full pb-10'
+            className={click? 'ml-56 w-full pb-10 overflow-auto': 'lg:ml-56 w-full pb-10'}
+            // className='ml-56 w-full pb-10'
         >
 
             <Box className='md:flex block justify-between items-center w-full p-8'>
