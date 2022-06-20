@@ -10,25 +10,16 @@ import worktime from '../assets/worktime.svg';
 import projects from '../assets/projects.svg';
 
 const DbContent = ({click}) => {
-    // const [click, setClick] = useState(false)
+
   return (
     <Box className='dbgrid bg-gray pt-10 ' >
-        <Box 
-            // className='lg:fixed lg:block hidden lg:w-52 lg:h-full pt-16 lg:top-0 lg:left-0 bg-white'
-            className={
-                click? 
-            'fixed block w-52 h-screen pt-16 top-0 left-0 bg-white overflow-auto'
-            : 
-            "lg:fixed lg:block hidden lg:w-52 lg:h-screen pt-16 overflow-auto lg:top-0 lg:left-0 bg-white" }
-            // className='fixed block w-52 h-full pt-16 top-0 left-0 bg-white'
+        {/* <Box                         
         >
-            <DbSidebar />
-        </Box>
+            <DbSidebar click={click}/>
+        </Box> */}
 
-        <Box 
-            // className='lg:ml-56 w-full pb-10'
-            className={click? 'ml-56 w-full pb-10 overflow-auto': 'lg:ml-56 w-full pb-10'}
-            // className='ml-56 w-full pb-10'
+        <Box         
+            className={click? 'ml-56 w-full pb-10 ': 'lg:ml-56 w-full pb-10'} 
         >
 
             <Box className='md:flex block justify-between items-center w-full p-8'>

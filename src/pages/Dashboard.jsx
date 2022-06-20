@@ -10,7 +10,7 @@ const Dashboard = () => {
   }
   return (
     <Box>
-        <DbNav handleClick={handleClick} click={click} />
+        {/* <DbNav handleClick={handleClick} click={click} /> */}
         <DbContent click={click}  />        
     </Box>
   )
