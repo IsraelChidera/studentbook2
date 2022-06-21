@@ -6,6 +6,8 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Profile from './components/dashboard/Profile';
 import Layout from './Layout';
 import Todo from './components/dashboard/Todo';
+import Report from './components/dashboard/Report';
+import Course from './components/dashboard/Course';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
           <Route path="/dashboard" element={<Dashboard/>}/>
           <Route path="/profile" element={<Profile />}/>
           <Route path="/todo" element={<Todo />}/>
+          <Route path="/report" element={<Report />}/>
+          <Route path="/course" element={<Course />}/>
         </Route>
       </Routes>
       

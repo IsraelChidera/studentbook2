@@ -79,27 +79,36 @@ const DbSidebar = ({click}) => {
                 </li>
 
                 <li className='mb-6'>
-                    <a href="#" className='flex p-4'>
+                    <NavLink 
+                        to="/report" 
+                        className={ ({isActive}) => 
+                                (isActive? 'flex bg-secondary text-white p-4':'text-secondary p-4 flex')}
+                    >
                         <img 
                             src={report}
                             alt='report icon'
                             className='w-4 mr-2'
+                            
                         />
                         <Text>
                             Report
                         </Text>
-                    </a>
+                    </NavLink>
                 </li>
 
                 <li className='mb-6'>
-                    <a href="#" className='flex p-4'>
+                    <NavLink 
+                        to="/course" 
+                        className={ ({isActive}) => 
+                            (isActive? 'flex bg-secondary text-white p-4':'text-secondary p-4 flex')}
+                    >
                         <img 
                             src={analytics}
                             alt='analytics icon'
                             className='w-4 mr-2'
                         />
                         <Text>Courses</Text>
-                    </a>
+                    </NavLink>
                 </li>
 
                 <li className='mb-6'>

@@ -8,9 +8,27 @@ import timetracker from '../assets/timetracker.svg';
 import activity from '../assets/activity.svg';
 import worktime from '../assets/worktime.svg';
 import projects from '../assets/projects.svg';
+import { useNavigate } from 'react-router-dom';
 
 const DbContent = ({click}) => {
+    const navigate = useNavigate();
 
+    const handleReport = () => {
+        navigate('/report')
+    }
+
+    const handleAddTodo = () => {
+        navigate('/todo')
+    }
+
+    const handleTodoImg = () => {
+        navigate('/todo')
+    }
+
+    const handleCourse = () => {
+        navigate('/course')
+    }
+    
   return (
     <Box className='dbgrid bg-gray pt-10 ' >
         {/* <Box                         
@@ -19,7 +37,7 @@ const DbContent = ({click}) => {
         </Box> */}
 
         <Box         
-            className={click? 'ml-56 w-full pb-10 ': 'lg:ml-56 w-full pb-10'} 
+            className={click? 'ml-56 w-full pb-10 px-4': 'lg:ml-56 w-full pb-10 px-4'} 
         >
 
             <Box className='md:flex block justify-between items-center w-full p-8'>
@@ -118,6 +136,7 @@ const DbContent = ({click}) => {
                                     src={projects}
                                     alt='activity icon'
                                     className='w-14'
+                                    onClick={handleTodoImg}
                                 />    
                             </Box>
                         </Box>
@@ -183,13 +202,93 @@ const DbContent = ({click}) => {
                     
 
                     <Box className='mt-6'>
-                        <Button className='bg-secondary'>
+                        <Button 
+                            className='bg-secondary'
+                            onClick={handleAddTodo}    
+                        >
                             Add todos
                         </Button>
                     </Box>
                 </Box>
             </Box>
 
+            <Box className='p-8 mx-0 mb-20 md:m-4 mt-4 rounded-3xl bg-white'>
+                <Box className='flex justify-between items-center'>
+                    <Text className='text-lg font-semibold'>
+                        Registered courses
+                    </Text>
+                    <Button
+                        className='bg-primary'
+                        onClick={handleCourse}
+                    >
+                        view all
+                    </Button>
+                </Box>
+
+                <Box className='mt-6 md:grid md:grid-cols-3 border-lightgray border-b'>
+                    <Text className='mb-4 font-semibold'>
+                        Title
+                    </Text>
+
+                    <Text className='mb-4 font-semibold'>
+                        Unit
+                    </Text>
+
+                    <Text className='mb-4 font-semibold'>
+                        Code
+                    </Text>
+                </Box>
+
+                <Box className=' md:grid md:grid-cols-3 
+                    border-lightgray border-b'
+                >
+                    <Text className='mb-4'>
+                        Mathematics
+                    </Text>
+
+                    <Text className='mb-4'>
+                        Mathematics
+                    </Text>
+
+                    <Text className='mb-4'>
+                        Mathematics
+                    </Text>
+                </Box>
+            </Box>
+
+            <Box className='p-8 mx-0 md:m-4  rounded-3xl bg-white'>
+                <Box className='flex justify-between items-center'>
+                    <Text className='text-lg font-semibold'>
+                        Reports
+                    </Text>
+                    <Button
+                        className='bg-primary'
+                        onClick={handleReport}
+                    >
+                        view all
+                    </Button>
+                </Box>
+
+                <Box className='mt-6 md:grid md:gap-8 md:grid-cols-3'>
+                    {/* <Text className='mb-4 font-semibold'>
+                        Title
+                    </Text>   */}
+
+                    <Box className='bg-primary w-full h-20 m-4'>
+                      
+                    </Box>   
+
+                    <Box className='bg-primary w-full h-20 m-4'>
+                        
+                    </Box>     
+
+                    <Box className='bg-primary w-full h-20 m-4'>
+                        
+                    </Box>            
+                </Box>
+
+                
+            </Box>
         </Box>
     </Box>
   )
