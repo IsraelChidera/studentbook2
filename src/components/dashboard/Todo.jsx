@@ -1,19 +1,18 @@
-import React, {useState} from 'react';
-import { Checkbox, Form, Input, TextArea } from 'antd';
+import React, {useState, useEffect} from 'react';
+import { Form, Input } from 'antd';
 import Button from '../UI/Button';
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import {useNavigate} from 'react-router-dom';
-import {auth} from '../../firebase';
-import Box from '../UI/Box'
-import Text from '../UI/Text'
+import Box from '../UI/Box';
+import Text from '../UI/Text';
+import { collection, addDoc, getDocs, query, where} from "firebase/firestore"; 
+import db from '../../firebase';
 
 const Todo = ({click}) => {
     const navigate = useNavigate();
 
     const [inputs, setInputs] = useState({
-        username: '',
-        email: '',
-        password: ''
+        todotag: '',
+        todotask: ''
     })
 
     const handleChange = (e) => {
@@ -23,31 +22,70 @@ const Todo = ({click}) => {
     }
 
     
-    const onFinish = (values) => {
+    const onFinish = async(values) => {
         console.log('Success:', values);
 
-        createUserWithEmailAndPassword(auth, inputs.email, inputs.password)
-        .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            // ...
-            navigate('/dashboard')
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorMessage, errorCode)
-        });
+        try {
+            const docRef = await addDoc(collection(db, "todos"), inputs);
+            console.log("Document written with ID: ", docRef.id);
+          } catch (e) {
+            console.error("Error adding document: ", e);
+          }
 
         setInputs({
-            email: '',
-            password: ''
+            todotag: '',
+            todotask: ''
         })
+        console.log(inputs)
     };
     
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
+
+    const [todos, setTodos] = useState([]);
+
+    const FetchData = async() => {
+        let unsubscribed = false;
+
+         getDocs(collection(db, "todos"))
+            .then((querySnapshot) => {
+                if(unsubscribed) return;
+
+                const newData = querySnapshot.docs
+                    .map((doc) => ({...doc.data(), id: doc.id}));
+
+                setTodos(newData);
+                console.log(newData)
+                console.log(todos)
+            })
+            .catch((err) => {
+                if(unsubscribed) return;
+                console.error("failed to retrieve data", err);
+            })
+
+            return () => unsubscribed  = true;
+    }
+
+    // const onFetchData = async() => {
+    //     const querySnapshot = await getDocs(collection(db, "todos"));
+    //     querySnapshot.forEach((doc) => {
+    //     // doc.data() is never undefined for query doc snapshots
+    //         console.log(doc.id, " => ", doc.data());
+    //         setTodos([doc.data()])
+    //         console.log(todos)
+    //     });
+
+    // }
+
+    useEffect(() => {
+        FetchData()
+        // const querySnapshot =  getDocs(collection(db, "todos"));
+        //     querySnapshot.map((doc) => {
+        //     console.log(`${doc.id} => ${doc.data()}`);
+    // });
+    // onFetchData()
+    }, [])
   return (
     <>
         <Box 
@@ -82,73 +120,72 @@ const Todo = ({click}) => {
                                 // disabled={componentDisabled}
                             >
                                 <Form.Item
-                                    label="Username"
-                                    name="username"
+                                    label="Todo tag"
+                                    name="todotag"
                                     rules={[
                                     {
                                         required: true,
-                                        message: 'Please input your username!',
+                                        message: 'Please select your todo tag!',
                                     },
                                     ]}
-                                >
-                                    <Input 
+                                    className='mb-4'
+                                >                                   
+                                    <select
                                         className="bg-gray-50 border border-primary text-secondary 
-                                        text-sm rounded-lg focus:ring-blue-500 focus:border-primary 
-                                        block w-full p-2.5 dark:bg-white dark:border-primary 
-                                        dark:placeholder-dark dark:text-secondary" 
+                                            text-sm rounded-lg focus:ring-blue-500 focus:border-primary 
+                                            block w-full p-2.5 dark:bg-white dark:border-primary 
+                                            dark:placeholder-dark dark:text-secondary" 
                                         onChange={handleChange}
-                                        type="text"
-                                        name="username"  
-                                        value={inputs.username}                          
-                                    />
-                                </Form.Item>
+                                        name="todotag"  
+                                    >
+                                        <option value="Education">
+                                            Select tag
+                                        </option>
+                                        <option value="Education">
+                                            Education
+                                        </option>
+                                        <option value="Entertainment">
+                                            Entertainment
+                                        </option>
+                                        <option value="Sports">
+                                            Sports
+                                        </option>
+                                        <option value="Finances">
+                                            Finances
+                                        </option>
+                                        <option value="Coding and designs">
+                                            Coding and designs
+                                        </option>
+                                        <option value="Work stuff">
+                                            Work stuff
+                                        </option>
+                                        <option value="Others">
+                                            Others
+                                        </option>
+                                    </select>
+                                </Form.Item>                                
 
                                 <Form.Item
-                                    name="email"
-                                    label="E-mail"
-                                    className='my-6'
-                                    rules={[
-                                    {
-                                        type: 'email',
-                                        message: 'The input is not valid E-mail!',
-                                    },
-                                    {
-                                        required: true,
-                                        message: 'Please input your E-mail!',
-                                    },
-                                    ]}
-                                >
-                                    <Input                                     
-                                        className="bg-gray-50 border border-primary text-secondary 
-                                        text-sm rounded-lg focus:ring-blue-500 focus:border-primary 
-                                        block w-full p-2.5 dark:bg-white dark:border-primary 
-                                        dark:placeholder-dark dark:text-secondary" 
-                                        onChange={handleChange}
-                                        type="email"
-                                        name="email"
-                                    />
-                                </Form.Item>
-
-                                <Form.Item
-                                    name="password"
-                                    label="Password"
+                                    name="todotask"
+                                    label="Todo task"
                                     rules={[
                                     {
                                         required: true,
-                                        message: 'Please input your password!',
+                                        message: 'Please input your task!',
                                     },
                                     ]}
                                     hasFeedback
-                                >
-                                    <Input.Password 
-                                        className="bg-gray-50 border border-primary text-secondary 
+                                >   
+                                    <textarea
+                                        rows={4} 
+                                        className="bg-gray-50  border border-primary text-secondary 
                                         text-sm rounded-lg focus:ring-blue-500 focus:border-primary 
                                         block w-full p-2.5 dark:bg-white dark:border-primary 
                                         dark:placeholder-dark dark:text-secondary" 
                                         onChange={handleChange}
-                                        type="password"
-                                        name="password"
-                                    />
+                                        name="todotask" 
+                                    >                                        
+                                    </textarea>                                                                    
                                 </Form.Item>                                                
 
                                 <Form.Item
@@ -160,7 +197,7 @@ const Todo = ({click}) => {
                                     <Button 
                                         className='bg-secondary mt-4'
                                     >
-                                        Update
+                                        Add todo
                                     </Button>
                                 </Form.Item>
 
@@ -169,10 +206,22 @@ const Todo = ({click}) => {
                         </Box>
 
                         <Box className='mt-10'>
-                            <Box className='bg-white md:mt-0 mt-8 p-4 rounded-3xl h-full w-full m-2'>
-                                Task one  
+                            <Box className='bg-white md:mt-0 mt-8 p-4  h-full w-full m-2'>
+                                {/* Task one   */}
+                                {todos?.map((todo,idx) => (
+                                        <Box key={idx}>
+                                            <Text>
+                                                {todo.todotask}
+                                            </Text>
+                                            <Text>
+                                                {todo.todotag}
+                                            </Text>
+                                        </Box>
+                                    )
+                                )}
                             </Box>
-                        </Box>
+                        </Box>                        
+
                     </Box>
                 </Box>
             </Box>
