@@ -10,6 +10,9 @@ const ModalLogin = ({setLogin}) => {
         email: '',
         password: ''
     })
+    const [user, setUser] = useState({
+        email: '',
+    })
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -22,11 +25,14 @@ const ModalLogin = ({setLogin}) => {
         
         signInWithEmailAndPassword(auth, inputs.email, inputs.password)
         .then((userCredential) => {
-            // Signed in 
+           
             const user = userCredential.user;
-            console.log("signed in successfully")
-            navigate('/dashboard')
-            // ...
+            console.log("signed in successfully", user.uid)
+            navigate('/dashboard');
+
+            setUser({
+                email:inputs.email
+            })
         })
         .catch((error) => {
             const errorCode = error.code;

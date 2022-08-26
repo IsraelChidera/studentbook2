@@ -1,6 +1,6 @@
 
 import Box from '../components/UI/Box';
-import React, { useState }  from 'react'
+import React, { useState }  from 'react';
 import Navbar from '../components/Navbar';
 import Header from '../components/Header';
 import Recommend from '../components/Recommend';
@@ -18,12 +18,10 @@ const Landing = () => {
 
   return (
     <Box className='mt-6'>
-        <Navbar handleLogin={handleLogin} />
-        <Header login={login} setLogin={setLogin} />
-        <Recommend />        
-        <Footer />
-
-        
+      <Navbar handleLogin={handleLogin} />
+      <Header login={login} setLogin={setLogin} />
+      <Recommend />        
+      <Footer />   
     </Box>
   )
 }

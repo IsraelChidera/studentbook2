@@ -4,15 +4,18 @@ import Button from '../UI/Button';
 import {useNavigate} from 'react-router-dom';
 import Box from '../UI/Box';
 import Text from '../UI/Text';
-import { collection, addDoc, getDocs, query, where} from "firebase/firestore"; 
+import { collection, serverTimestamp, addDoc, getDocs, query, where, getDoc, orderBy, doc, onSnapshot} from "firebase/firestore"; 
 import db from '../../firebase';
+import {auth} from '../../firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 
-const Todo = ({click}) => {
+const Todo = ({click, ids}) => {
     const navigate = useNavigate();
+    console.log("ids", ids)
 
     const [inputs, setInputs] = useState({
         todotag: '',
-        todotask: ''
+        todotask: '',        
     })
 
     const handleChange = (e) => {
@@ -26,7 +29,7 @@ const Todo = ({click}) => {
         console.log('Success:', values);
 
         try {
-            const docRef = await addDoc(collection(db, "todos"), inputs);
+            const docRef = await addDoc(collection(db, "todos").doc(ids), inputs);
             console.log("Document written with ID: ", docRef.id);
           } catch (e) {
             console.error("Error adding document: ", e);
@@ -35,8 +38,7 @@ const Todo = ({click}) => {
         setInputs({
             todotag: '',
             todotask: ''
-        })
-        console.log(inputs)
+        })        
     };
     
     const onFinishFailed = (errorInfo) => {
@@ -44,48 +46,84 @@ const Todo = ({click}) => {
     };
 
     const [todos, setTodos] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    const FetchData = async() => {
-        let unsubscribed = false;
+    // const FetchData = async() => {
+    //     let unsubscribed = false;
 
-         getDocs(collection(db, "todos"))
-            .then((querySnapshot) => {
-                if(unsubscribed) return;
+    //     const usersRef = collection(db, "todos");
+    //     const user = doc(usersRef, ids);
 
-                const newData = querySnapshot.docs
-                    .map((doc) => ({...doc.data(), id: doc.id}));
+    //     getDoc(user).then((doc) => {
+    //         setTodos(doc.data().todos);
+    //     })
 
-                setTodos(newData);
-                console.log(newData)
-                console.log(todos)
-            })
-            .catch((err) => {
-                if(unsubscribed) return;
-                console.error("failed to retrieve data", err);
-            })
+        
 
-            return () => unsubscribed  = true;
-    }
+    //     //  getDocs(collection(db, "todos"))
+    //     //     .then((querySnapshot) => {
+    //     //         if(unsubscribed) return;
 
-    // const onFetchData = async() => {
-    //     const querySnapshot = await getDocs(collection(db, "todos"));
-    //     querySnapshot.forEach((doc) => {
-    //     // doc.data() is never undefined for query doc snapshots
-    //         console.log(doc.id, " => ", doc.data());
-    //         setTodos([doc.data()])
-    //         console.log(todos)
-    //     });
+    //     //         const newData = querySnapshot.docs
+    //     //             .map((doc) => ({...doc.data(), id: doc.id}));
 
+    //     //         setTodos(newData);
+    //     //         setLoading(false);
+    //     //         console.log(newData)
+    //     //         console.log(todos)
+                
+    //     //     })
+    //     //     .catch((err) => {
+    //     //         if(unsubscribed) return;
+    //     //         console.error("failed to retrieve data", err);
+    //     //     })
+
+    //         return () => unsubscribed  = true;
     // }
 
+    const fetchData = async() => {
+
+        const colRef = collection(db, "todos");
+        // const user = doc(colRef, myUser.uid);
+        const q = query(colRef, orderBy("todotask"));
+        
+        
+
+        onSnapshot(q, (snapshot) => {            
+            const newData = snapshot.docs.map((doc)=> ({...doc.data(), id: doc.id}));
+            setTodos(newData);
+            console.log("todos" );
+        })
+    }
+
+    const check = () => {
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+              const snapshot = await getDoc(doc(db, "todos", user.uid))
+              console.log("wait", snapshot.data())
+            }
+          });
+    }
+
+    // const myUser = auth.currentUser;
+    // console.log(myUser)
+    // const usersRef = collection(db, "todos");
+    // const user = doc(usersRef, myUser.uid);
+
     useEffect(() => {
-        FetchData()
-        // const querySnapshot =  getDocs(collection(db, "todos"));
-        //     querySnapshot.map((doc) => {
-        //     console.log(`${doc.id} => ${doc.data()}`);
-    // });
-    // onFetchData()
-    }, [])
+        check();
+
+
+        fetchData();
+        
+    }, [        
+    
+    ])
+
+    const handleDelete =() => {
+        console.log("yesss")
+    }
+
   return (
     <>
         <Box 
@@ -138,7 +176,7 @@ const Todo = ({click}) => {
                                         onChange={handleChange}
                                         name="todotag"  
                                     >
-                                        <option value="Education">
+                                        <option value="select tag">
                                             Select tag
                                         </option>
                                         <option value="Education">
@@ -208,14 +246,29 @@ const Todo = ({click}) => {
                         <Box className='mt-10'>
                             <Box className='bg-white md:mt-0 mt-8 p-4  h-full w-full m-2'>
                                 {/* Task one   */}
+                                
                                 {todos?.map((todo,idx) => (
-                                        <Box key={idx}>
-                                            <Text>
-                                                {todo.todotask}
-                                            </Text>
-                                            <Text>
-                                                {todo.todotag}
-                                            </Text>
+                                        <Box 
+                                            key={idx}
+                                            className='relative bg-secondary
+                                            text-white p-4 my-6 rounded-lg
+                                             '
+                                        >
+                                            <Box className='pt-4 lg:flex justify-between items-center'>
+                                                <Text className='text-lg mb-6'>
+                                                    {todo.todotask}
+                                                </Text>
+                                                <Text className='text-sm'>
+                                                    {todo.todotag}
+                                                </Text>
+                                            </Box>
+                                            <Box 
+                                                className='absolute top-0 right-2 
+                                                cursor-pointer '
+                                                
+                                            >
+                                                <i onClick={handleDelete} className="fa fa-times" aria-hidden="true"></i>
+                                            </Box>
                                         </Box>
                                     )
                                 )}
